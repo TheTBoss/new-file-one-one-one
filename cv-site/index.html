@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thomas Willmott — Finance &amp; Mathematics, Royal Holloway</title>
+<meta name="description" content="Thomas Willmott — BSc Finance and Mathematics, Royal Holloway (2027). FMVA-certified financial modeller, founder of Clarifin, eleven years in the Army Cadet Force. Targeting UK lower mid-market private equity.">
+<meta name="author" content="Thomas Willmott">
+<link rel="canonical" href="https://thomaswillmott.co.uk/">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Thomas Willmott">
+<meta property="og:title" content="Thomas Willmott — Finance &amp; Mathematics, Royal Holloway">
+<meta property="og:description" content="Final-year Finance and Mathematics undergraduate targeting UK lower mid-market private equity. FMVA (93%), founder of Clarifin, eleven years in the Army Cadet Force.">
+<meta property="og:url" content="https://thomaswillmott.co.uk/">
+<meta property="og:locale" content="en_GB">
+<meta property="profile:first_name" content="Thomas">
+<meta property="profile:last_name" content="Willmott">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thomas Willmott — Finance &amp; Mathematics, Royal Holloway">
+<meta name="twitter:description" content="Final-year Finance and Mathematics undergraduate targeting UK lower mid-market private equity. FMVA (93%), founder of Clarifin.">
+<meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1A19" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232B2B2B'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' fill='%23C9A227' text-anchor='middle'%3ETW%3C/text%3E%3C/svg%3E">
+
+<style>
+:root{
+  --ink:#2B2B2B;
+  --ink-soft:#5A5750;
+  --ink-faint:#817D74;
+  --bg:#FAF8F4;
+  --panel:#F3F0E9;
+  --rule:#E0DCD2;
+  --accent:#C9A227;
+  --accent-ink:#8A6E12;
+
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --measure:50rem;
+  --gap:clamp(2.25rem,6vw,3.5rem);
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#E9E6DF;
+    --ink-soft:#B4AFA4;
+    --ink-faint:#8E8981;
+    --bg:#1A1A19;
+    --panel:#232321;
+    --rule:#35342F;
+    --accent:#D8B646;
+    --accent-ink:#E2C465;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(1rem,0.96rem + 0.2vw,1.0625rem);
+  line-height:1.62;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{
+  max-width:var(--measure);
+  margin:0 auto;
+  padding:clamp(2.5rem,8vw,5rem) clamp(1.25rem,5vw,2.5rem) 4rem;
+}
+
+a{color:inherit;text-decoration:none}
+
+.link{
+  color:var(--ink);
+  border-bottom:1px solid var(--accent);
+  padding-bottom:1px;
+  transition:color .15s ease,border-color .15s ease;
+}
+.link:hover,.link:focus-visible{color:var(--accent-ink);border-bottom-color:var(--accent-ink)}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- Header ---------- */
+
+.masthead{margin-bottom:var(--gap)}
+
+h1{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(2.1rem,1.55rem + 2.6vw,3.05rem);
+  line-height:1.08;
+  letter-spacing:-0.015em;
+  margin:0 0 .75rem;
+}
+
+.positioning{
+  font-family:var(--serif);
+  font-size:clamp(1.05rem,1rem + 0.35vw,1.25rem);
+  line-height:1.5;
+  color:var(--ink-soft);
+  margin:0 0 1rem;
+  max-width:34em;
+}
+
+.status{
+  font-size:.8125rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0 0 1.5rem;
+}
+.status span+span::before{content:"·";margin:0 .5em;color:var(--rule)}
+
+.contact{
+  list-style:none;
+  margin:0;
+  padding:1.25rem 0 0;
+  border-top:1px solid var(--rule);
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem 1.5rem;
+  font-size:.9375rem;
+}
+
+.cv-download{font-variant-numeric:tabular-nums}
+.cv-download .link{border-bottom-width:2px}
+
+/* ---------- Sections ---------- */
+
+section{
+  padding-top:var(--gap);
+  border-top:1px solid var(--rule);
+  margin-top:var(--gap);
+}
+
+h2{
+  font-family:var(--sans);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0 0 1.5rem;
+}
+
+@media (min-width:52em){
+  section{display:grid;grid-template-columns:10rem 1fr;column-gap:2.5rem}
+  h2{grid-column:1;margin:.3rem 0 0}
+  .body{grid-column:2}
+}
+
+.body>*+*{margin-top:1.75rem}
+
+/* ---------- Entries ---------- */
+
+.entry-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:baseline;
+  column-gap:1rem;
+}
+
+h3{
+  font-family:var(--serif);
+  font-size:1.1875rem;
+  font-weight:600;
+  line-height:1.3;
+  margin:0;
+  letter-spacing:-0.005em;
+}
+
+.when{
+  font-size:.8125rem;
+  color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+
+.where{
+  font-size:.9375rem;
+  color:var(--ink-soft);
+  margin:.15rem 0 0;
+}
+
+.entry p{margin:.5rem 0 0}
+p.detail{color:var(--ink-soft);font-size:.9688rem}
+
+/* ---------- Lists ---------- */
+
+ul.plain{list-style:none;margin:.6rem 0 0;padding:0}
+ul.plain li{position:relative;padding-left:1rem;margin-top:.3rem;color:var(--ink-soft);font-size:.9688rem}
+ul.plain li::before{
+  content:"";
+  position:absolute;
+  left:0;top:.72em;
+  width:.3125rem;height:1px;
+  background:var(--accent);
+}
+
+.inline-list{
+  margin:.5rem 0 0;
+  color:var(--ink-soft);
+  font-size:.9688rem;
+}
+.inline-list dt{
+  font-size:.75rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-top:1rem;
+}
+.inline-list dd{margin:.15rem 0 0}
+
+/* ---------- Research cards ---------- */
+
+.cards{display:grid;gap:1rem;margin-top:0}
+@media (min-width:40em) and (max-width:51.99em){.cards{grid-template-columns:1fr 1fr;gap:1.25rem}}
+@media (min-width:62em){.cards{grid-template-columns:1fr 1fr;gap:1.25rem}}
+
+.card{
+  display:block;
+  padding:1.125rem 1.25rem 1.25rem;
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-left:2px solid var(--accent);
+  transition:border-color .15s ease,transform .15s ease;
+}
+.card:hover,.card:focus-visible{border-color:var(--accent)}
+.card h3{font-size:1.0625rem}
+.card .takeaway{margin:.4rem 0 0;font-size:.9375rem;color:var(--ink-soft)}
+.card .more{
+  display:inline-block;
+  margin-top:.75rem;
+  font-size:.8125rem;
+  letter-spacing:.04em;
+  color:var(--accent-ink);
+}
+.card .more::after{content:" \2192"}
+
+/* ---------- Skills ---------- */
+
+.skills{
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-wrap:wrap;gap:.4rem .5rem;
+}
+.skills li{
+  font-size:.875rem;
+  color:var(--ink-soft);
+  border:1px solid var(--rule);
+  padding:.2rem .625rem;
+  border-radius:2px;
+}
+
+/* ---------- Footer ---------- */
+
+footer{
+  margin-top:var(--gap);
+  padding-top:1.5rem;
+  border-top:1px solid var(--rule);
+  font-size:.8125rem;
+  color:var(--ink-faint);
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem 1.25rem;
+  justify-content:space-between;
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- Print: one clean page ---------- */
+
+@media print{
+  @page{size:A4 portrait;margin:11mm 13mm}
+
+  :root{
+    --ink:#000;--ink-soft:#222;--ink-faint:#444;
+    --bg:#fff;--panel:#fff;--rule:#bbb;--accent:#8A6E12;--accent-ink:#000;
+  }
+
+  body{
+    background:#fff;color:#000;
+    font-size:8.6pt;
+    line-height:1.34;
+  }
+
+  .page{max-width:none;margin:0;padding:0}
+
+  .no-print{display:none!important}
+
+  a,.link{color:#000;border-bottom:0;text-decoration:none}
+
+  h1{font-size:19pt;margin-bottom:2pt}
+  .positioning{font-size:9.4pt;line-height:1.3;margin-bottom:2pt;max-width:none}
+  .status{font-size:7.2pt;margin-bottom:5pt;letter-spacing:.04em}
+  .contact{padding-top:4pt;gap:1pt 10pt;font-size:8.2pt}
+  .contact a[data-print]{font-size:0}
+  .contact a[data-print]::after{content:attr(data-print);font-size:8.2pt}
+  .masthead{margin-bottom:8pt}
+
+  section{
+    margin-top:7pt;padding-top:6pt;
+    display:grid;grid-template-columns:23mm 1fr;column-gap:5mm;
+    break-inside:avoid;page-break-inside:avoid;
+  }
+  h2{font-size:7pt;letter-spacing:.1em;margin:1pt 0 0;color:#444}
+  .body>*+*{margin-top:6pt}
+
+  h3{font-size:9.6pt}
+  .where{font-size:8.2pt;margin-top:0}
+  .when{font-size:7.6pt}
+  .entry p{margin-top:2pt}
+  p.detail{font-size:8.3pt}
+  ul.plain{margin-top:2pt}
+  ul.plain li{margin-top:1pt;font-size:8.3pt}
+  ul.plain li::before{top:.62em}
+  .inline-list{font-size:8.3pt}
+  .inline-list dt{margin-top:4pt;font-size:7pt}
+
+  .cards{grid-template-columns:1fr 1fr;gap:5pt}
+  .card{
+    background:#fff;border:0;border-left:1pt solid #8A6E12;
+    padding:0 0 0 5pt;break-inside:avoid;
+  }
+  .card h3{font-size:9.6pt}
+  .card .takeaway{font-size:8.3pt;margin-top:1pt}
+  .card .more{display:none}
+
+  .skills{gap:2pt 4pt}
+  .skills li{border:0;padding:0;font-size:8.3pt}
+  .skills li::after{content:" ·";color:#888}
+  .skills li:last-child::after{content:""}
+
+  footer{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>Thomas Willmott</h1>
+
+    <p class="positioning">
+      Final-year Finance and Mathematics undergraduate targeting UK lower
+      mid-market private equity, with investment banking as a route in.
+    </p>
+
+    <p class="status">
+      <span>Graduating June 2027</span><span>Right to work in the UK</span><span>London</span>
+    </p>
+
+    <ul class="contact">
+      <li><a class="link" href="mailto:tjwillmott12@gmail.com">tjwillmott12@gmail.com</a></li>
+      <li><a class="link" href="https://www.linkedin.com/in/thomas-willmott/" rel="me noopener" data-print="linkedin.com/in/thomas-willmott">LinkedIn</a></li>
+      <li><a class="link" href="https://github.com/thetboss" rel="me noopener" data-print="github.com/thetboss">GitHub</a></li>
+      <li class="cv-download no-print"><a class="link" href="/thomas-willmott-cv.pdf" download>Download CV (PDF)</a></li>
+    </ul>
+  </header>
+
+  <main>
+
+    <section id="education" aria-labelledby="h-education">
+      <h2 id="h-education">Education</h2>
+      <div class="body">
+        <article class="entry">
+          <div class="entry-head">
+            <h3>BSc Finance and Mathematics</h3>
+            <span class="when">2024&ndash;2027</span>
+          </div>
+          <p class="where">Royal Holloway, University of London</p>
+          <p class="detail">
+            Joint honours combining quantitative methods with applied finance.
+            Relevant coursework: financial econometrics; probability and
+            statistics; microeconomics; macroeconomics; financial markets and
+            institutions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="credentials" aria-labelledby="h-credentials">
+      <h2 id="h-credentials">Credentials</h2>
+      <div class="body">
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Financial Modeling &amp; Valuation Analyst (FMVA)</h3>
+            <span class="when">Completed &mdash; 93%</span>
+          </div>
+          <p class="where">Corporate Finance Institute</p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Investment Banking &amp; Private Equity Modeling Specialization</h3>
+            <span class="when">Sept 2026</span>
+          </div>
+          <p class="where">Corporate Finance Institute</p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Commercial Banking &amp; Credit Analyst (CBCA)</h3>
+            <span class="when">In progress</span>
+          </div>
+          <p class="where">Corporate Finance Institute</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="clarifin" aria-labelledby="h-clarifin">
+      <h2 id="h-clarifin">Founder</h2>
+      <div class="body">
+        <article class="entry">
+          <div class="entry-head">
+            <h3><a class="link" href="https://clarifin.co.uk" rel="noopener">Clarifin</a></h3>
+            <span class="when">Sept 2026&ndash;present</span>
+          </div>
+          <p class="where">UK digital financial templates business &mdash; clarifin.co.uk</p>
+          <p class="detail">
+            Founded and run solo: product direction, Excel modelling and the
+            full technical stack. Live since September 2026 with 13 templates
+            shipped to paying customers.
+          </p>
+          <ul class="plain">
+            <li>Built every model in the catalogue &mdash; three-statement, DCF and LBO templates written for non-specialist operators.</li>
+            <li>Runs on Cloudflare Workers and R2, with Stripe checkout and Resend for automated delivery; no third-party platform.</li>
+            <li>Owns pricing, positioning and customer support end to end.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="research" aria-labelledby="h-research">
+      <h2 id="h-research">Independent research</h2>
+      <div class="body">
+        <p class="detail">
+          Valuation and leveraged buyout work built from primary filings and
+          published in full on LinkedIn.
+        </p>
+        <div class="cards">
+          <a class="card" href="https://www.linkedin.com/in/thomas-willmott/recent-activity/all/" rel="noopener">
+            <h3>Hollywood Bowl Group &mdash; LBO series</h3>
+            <p class="takeaway">
+              Multi-week build: operating model, KPI dashboard and returns
+              analysis testing whether centre-level cash generation supports a
+              sponsor case.
+            </p>
+            <span class="more">Read the series</span>
+          </a>
+          <a class="card" href="https://www.linkedin.com/in/thomas-willmott/recent-activity/all/" rel="noopener">
+            <h3>Microsoft &mdash; three-scenario DCF</h3>
+            <p class="takeaway">
+              Bear, base and bull cases with sensitivity analysis on WACC and
+              terminal growth, isolating how much of the value sits in the
+              terminal assumption.
+            </p>
+            <span class="more">Read the analysis</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="leadership" aria-labelledby="h-leadership">
+      <h2 id="h-leadership">Leadership</h2>
+      <div class="body">
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Company Commander &amp; Adult Volunteer Instructor</h3>
+            <span class="when">11 years continuous</span>
+          </div>
+          <p class="where">Army Cadet Force</p>
+          <p class="detail">
+            Progressed from cadet to Cadet Sergeant Major of a company of 100+
+            cadets, then commissioned responsibility as Company Commander.
+            Awarded the ACF Exemplary Service Award.
+          </p>
+          <ul class="plain">
+            <li>Accountable for the training, welfare and discipline of a 100+ cadet company and its adult instructor team.</li>
+            <li>Plans and delivers structured training programmes, then assesses performance against national standards.</li>
+            <li>Holds the safety-critical call on field exercises and live ranges, including risk assessment and abort decisions.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" aria-labelledby="h-experience">
+      <h2 id="h-experience">Experience</h2>
+      <div class="body">
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Sales Supervisor</h3>
+            <!-- TODO: add employment dates -->
+            <span class="when"></span>
+          </div>
+          <p class="where">S&oslash;strene Grene</p>
+          <p class="detail">
+            Deputised as store manager with full responsibility for trading,
+            staffing and cash. Sent to open new stores and train their teams
+            from scratch.
+          </p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Finance Placement</h3>
+            <span class="when">2023</span>
+          </div>
+          <p class="where">Neos Networks</p>
+          <p class="detail">
+            Completed the firm's internal financial modelling training and
+            reviewed working models alongside a finance analyst.
+          </p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Delivery Driver</h3>
+            <span class="when">Current</span>
+          </div>
+          <p class="where">Tesco</p>
+          <p class="detail">
+            Worked alongside full-time study and the Clarifin business.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="h-skills">
+      <h2 id="h-skills">Skills</h2>
+      <div class="body">
+        <ul class="skills">
+          <li>Financial modelling</li>
+          <li>Excel (advanced)</li>
+          <li>DCF</li>
+          <li>LBO</li>
+          <li>Trading &amp; transaction comps</li>
+          <li>Python</li>
+          <li>SQL (basics)</li>
+          <li>Cloudflare Workers</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="no-print">
+    <span>Thomas Willmott &mdash; Finance &amp; Mathematics, Royal Holloway</span>
+    <span><a class="link" href="mailto:tjwillmott12@gmail.com">tjwillmott12@gmail.com</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
