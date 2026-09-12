@@ -62,10 +62,9 @@ an inline script by hand you must re-run it or the scripts will be blocked.
    is derived from "eleven years continuous", and the FMVA is grouped under
    2026. Both are marked TODO in the generator. The Søstrene Grene
    employment dates are blank, also TODO.
-6. **Claims to check before an interview.** The Swift and React Native
-   entries under "Also worked with", and the two HealthTracker projects,
-   describe code in this repository. Remove anything you would not want to
-   be questioned on.
+6. **Project links.** The three remaining project cards point at
+   clarifin.co.uk, your LinkedIn activity feed and this repository. Point
+   the research cards at the specific posts.
 7. **Domain.** Replace `https://thomaswillmott.co.uk` in
    `tools/generate_site.py` (`SITE_URL`) and re-run it. It feeds the
    canonical tags, the Open Graph URLs, the structured data, `robots.txt`

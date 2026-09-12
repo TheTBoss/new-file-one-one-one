@@ -1347,7 +1347,6 @@ HOME = """    <section class="hero wrap">
           <ul class="plain" style="margin-top:1rem">
             <li>Final year of a joint honours degree, with a dissertation and finals in 2027.</li>
             <li>Running Clarifin day to day &mdash; new templates, support, and the infrastructure behind it.</li>
-            <li>Working through the CBCA credit certification.</li>
             <li>Commanding a company in the Army Cadet Force as an adult volunteer.</li>
             <li>Publishing valuation and buyout work, and looking for a 2027 graduate seat in private equity or investment banking.</li>
           </ul>
@@ -1372,8 +1371,7 @@ HOME = """    <section class="hero wrap">
       {eyebrow_work}
       <h2>Selected work</h2>
       <p class="muted" style="margin:.75rem 0 1.75rem;max-width:38em">
-        Three pieces that show the range: a live business, a multi-week
-        buyout model, and a full mobile application. The
+        A live business and two independent valuation builds. The
         <a class="link" href="projects.html">projects page</a> has the rest.
       </p>
 
@@ -1390,10 +1388,10 @@ HOME = """    <section class="hero wrap">
           <p>A multi-week leveraged buyout build: operating model, KPI dashboard and returns analysis, published in full.</p>
           <span class="foot arrow">Read more</span>
         </a>
-        <a class="card card-link" href="projects.html?filter=software">
-          <span class="tag tag-accent">Software</span>
-          <h3 style="margin-top:.7rem">HealthTracker</h3>
-          <p>A health and fitness tracker written twice over: once in SwiftUI for iOS, once in React Native.</p>
+        <a class="card card-link" href="projects.html#microsoft-three-scenario-dcf">
+          <span class="tag tag-accent">Research</span>
+          <h3 style="margin-top:.7rem">Microsoft DCF</h3>
+          <p>Bear, base and bull cases with sensitivity analysis, isolating how much of the value rests on the terminal assumption.</p>
           <span class="foot arrow">Read more</span>
         </a>
       </div>
@@ -1450,8 +1448,7 @@ TIMELINE = [
     # TODO: confirm the year the FMVA was completed; it is grouped here for now.
     ("2026", "Financial modelling certifications", "Corporate Finance Institute",
      "Completed the FMVA at 93%, then the Investment Banking &amp; Private "
-     "Equity Modeling Specialization in September 2026. The CBCA credit "
-     "certification is in progress.", False),
+     "Equity Modeling Specialization in September 2026.", False),
     ("2026", "Launched Clarifin", "clarifin.co.uk",
      "A digital financial templates business, built and run solo: the models "
      "themselves, the storefront, the payment and delivery pipeline, and the "
@@ -1686,43 +1683,6 @@ PROJECTS = [
     {
         "tags": "software",
         "cat": "Software",
-        "title": "HealthTracker &mdash; iOS",
-        "when": "SwiftUI &amp; SwiftData",
-        "summary": "A health and fitness tracking app covering nutrition, workouts, sleep, "
-                   "habits, mood and body measurements. Around 6,000 lines of Swift across 25 files.",
-        "stack": ["Swift", "SwiftUI", "SwiftData", "Swift Charts"],
-        "detail": """<h4>Scope</h4>
-                <p>Six tracking domains in one app: macro-level nutrition logging with
-                a food library, live workout tracking with per-set weight, reps and RPE,
-                sleep duration and quality, habit streaks, mood and energy, and full
-                body measurements.</p>
-                <h4>How it is put together</h4>
-                <p>SwiftUI throughout, with SwiftData models split by domain
-                (nutrition, workout, sleep, habits, body, lifestyle) and charts for
-                seven-day trends against goal lines.</p>""",
-        "link": ("https://github.com/thetboss/new-file-one-one-one", "Source on GitHub"),
-    },
-    {
-        "tags": "software",
-        "cat": "Software",
-        "title": "HealthTracker &mdash; React Native",
-        "when": "Expo &amp; TypeScript",
-        "summary": "The same application rebuilt cross-platform: twelve screens, typed "
-                   "throughout, with client-side state and local persistence.",
-        "stack": ["TypeScript", "React Native", "Expo", "Zustand", "React Navigation"],
-        "detail": """<h4>Why rebuild it</h4>
-                <p>Writing the same product twice, once natively and once
-                cross-platform, is the fastest way to learn what each stack actually
-                costs you.</p>
-                <h4>How it is put together</h4>
-                <p>Expo with TypeScript, bottom-tab and native-stack navigation,
-                Zustand for state, AsyncStorage for persistence and react-native-svg
-                for the charts. Roughly 4,500 lines across 30 files.</p>""",
-        "link": ("https://github.com/thetboss/new-file-one-one-one", "Source on GitHub"),
-    },
-    {
-        "tags": "software",
-        "cat": "Software",
         "title": "This site",
         "when": "2026",
         "summary": "Six static pages with no framework, no build step and no third-party "
@@ -1774,8 +1734,8 @@ PROJECTS_PAGE = """    <section class="section wrap">
       {eyebrow}
       <h1 style="font-size:clamp(1.9rem,1.4rem + 2.2vw,2.75rem)">Projects</h1>
       <p class="lede" style="margin:1.25rem 0 0;max-width:36em">
-        Financial research, a live business, and software I have built to
-        find out how something works. Filter by type or search the text.
+        A live business, independent valuation work, and the things I have
+        built to run it. Filter by type or search the text.
       </p>
 
       <div data-filter-group data-noun="project">
@@ -1830,10 +1790,6 @@ SKILL_GROUPS = [
         ("Stripe", "Checkout, webhooks and fulfilment for a live business taking real payments."),
         ("HTML, CSS and JavaScript", "Hand-written front ends, including this site. No framework."),
         ("Git", "Branching, review and deployment from a repository."),
-    ]),
-    ("Also worked with", "technical", [
-        ("Swift and SwiftUI", "A full iOS health tracking app with SwiftData persistence."),
-        ("React Native and TypeScript", "The same app rebuilt cross-platform with Expo and Zustand."),
     ]),
     ("Leadership and operations", "leadership", [
         ("Training delivery", "Planning and running structured programmes for a 100+ cadet company, then assessing against national standards."),
@@ -1924,13 +1880,6 @@ SKILLS_PAGE = """    <section class="section wrap">
             </div>
             <p class="where">Corporate Finance Institute</p>
           </article>
-          <article class="entry">
-            <div class="entry-head">
-              <h3>Commercial Banking &amp; Credit Analyst (CBCA)</h3>
-              <span class="when">In progress</span>
-            </div>
-            <p class="where">Corporate Finance Institute</p>
-          </article>
         </div>
       </div>
     </section>
@@ -2002,10 +1951,11 @@ INTERESTS = """    <section class="section wrap">
           <span class="tag tag-accent">Ongoing</span>
           <h3 style="margin-top:.7rem">Building things that work</h3>
           <p>
-            I learn a stack by shipping something in it. That is how a health
-            tracking app got written twice, once in SwiftUI and once in React
-            Native, and how Clarifin ended up running on infrastructure I
-            configured myself rather than on somebody&rsquo;s storefront plugin.
+            I learn a stack by shipping something in it. That is how Clarifin
+            ended up running on infrastructure I configured myself &mdash;
+            Workers, object storage, payments and automated delivery &mdash;
+            rather than on somebody else&rsquo;s storefront plugin, and how this
+            site came to be written by hand rather than assembled from a theme.
           </p>
         </article>
         <article class="card">
@@ -2104,13 +2054,6 @@ CV = """    <section class="section wrap">
               <div class="entry-head">
                 <h3>Investment Banking &amp; Private Equity Modeling Specialization</h3>
                 <span class="when">Sept 2026</span>
-              </div>
-              <p class="where">Corporate Finance Institute</p>
-            </article>
-            <article class="entry">
-              <div class="entry-head">
-                <h3>Commercial Banking &amp; Credit Analyst (CBCA)</h3>
-                <span class="when">In progress</span>
               </div>
               <p class="where">Corporate Finance Institute</p>
             </article>
@@ -2293,8 +2236,8 @@ PAGES = [
      ABOUT),
     ("projects.html",
      "Projects — Thomas Willmott",
-     "Financial research, a live templates business and software builds: Clarifin, a "
-     "Hollywood Bowl LBO series, a Microsoft DCF and two health-tracking apps.",
+     "Independent valuation work and a live templates business: Clarifin, a "
+     "multi-week Hollywood Bowl LBO series and a three-scenario Microsoft DCF.",
      PROJECTS_PAGE),
     ("skills.html",
      "Skills — Thomas Willmott",
