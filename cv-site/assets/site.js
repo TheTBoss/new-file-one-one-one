@@ -81,66 +81,112 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- Filterable, searchable collections ---------- */
+  /* ---------- Filterable, searchable collections ----------
+     Items carry data-tags. An optional wrapper marked data-filter-section
+     hides itself when every item inside it is filtered out. Works for a flat
+     grid of project cards and for skills grouped inside category cards. */
 
   function initFilters() {
-    var groups = document.querySelectorAll('[data-filter-group]');
-    groups.forEach(function (group) {
-      var items = group.querySelectorAll('[data-tags]');
-      var buttons = group.querySelectorAll('.filter');
+    document.querySelectorAll('[data-filter-group]').forEach(function (group) {
+      var items = Array.prototype.slice.call(group.querySelectorAll('[data-tags]'));
+      var sections = Array.prototype.slice.call(group.querySelectorAll('[data-filter-section]'));
+      var buttons = Array.prototype.slice.call(group.querySelectorAll('.filter'));
       var input = group.querySelector('.search input');
       var count = group.querySelector('.result-count');
       var empty = group.querySelector('.empty-state');
+      var clears = Array.prototype.slice.call(group.querySelectorAll('[data-clear]'));
+      var clearChip = group.querySelector('.filter[data-clear]');
+      var noun = group.getAttribute('data-noun') || 'item';
       var active = 'all';
 
-      function apply() {
+      function apply(pushState) {
         var q = input ? input.value.trim().toLowerCase() : '';
         var shown = 0;
 
         items.forEach(function (item) {
           var tags = (item.getAttribute('data-tags') || '').toLowerCase();
           var text = (item.textContent || '').toLowerCase();
-          var matchTag = active === 'all' || tags.indexOf(active) !== -1;
-          var matchText = !q || text.indexOf(q) !== -1;
-          var show = matchTag && matchText;
+          var show = (active === 'all' || tags.split(/\s+/).indexOf(active) !== -1) &&
+                     (!q || text.indexOf(q) !== -1);
           item.hidden = !show;
           if (show) shown++;
         });
 
-        if (count) {
-          var noun = group.getAttribute('data-noun') || 'item';
-          count.textContent = shown + ' ' + noun + (shown === 1 ? '' : 's');
-        }
+        sections.forEach(function (section) {
+          var any = section.querySelectorAll('[data-tags]:not([hidden])').length;
+          section.hidden = any === 0;
+        });
+
+        if (count) count.textContent = shown + ' ' + noun + (shown === 1 ? '' : 's');
         if (empty) empty.hidden = shown !== 0;
+        if (clearChip) clearChip.hidden = active === 'all' && !q;
+
+        if (pushState) {
+          var url = new URL(window.location.href);
+          if (active === 'all') url.searchParams.delete('filter');
+          else url.searchParams.set('filter', active);
+          if (q) url.searchParams.set('q', q);
+          else url.searchParams.delete('q');
+          history.replaceState(null, '', url);
+        }
+      }
+
+      function select(name, pushState) {
+        active = name || 'all';
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed',
+            b.getAttribute('data-filter') === active ? 'true' : 'false');
+        });
+        apply(pushState);
       }
 
       buttons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          active = btn.getAttribute('data-filter') || 'all';
-          buttons.forEach(function (b) {
-            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-          });
-          apply();
-          var url = new URL(window.location.href);
-          if (active === 'all') url.searchParams.delete('filter');
-          else url.searchParams.set('filter', active);
-          history.replaceState(null, '', url);
+          select(btn.getAttribute('data-filter'), true);
         });
       });
 
       if (input) {
-        input.addEventListener('input', apply);
+        var timer = null;
+        input.addEventListener('input', function () {
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function () { apply(true); }, 80);
+        });
         input.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') { input.value = ''; apply(); }
+          if (e.key !== 'Escape') return;
+          input.value = '';
+          apply(true);
         });
       }
 
-      var preset = new URL(window.location.href).searchParams.get('filter');
-      if (preset) {
-        var match = group.querySelector('.filter[data-filter="' + preset.replace(/"/g, '') + '"]');
-        if (match) match.click();
+      clears.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (input) input.value = '';
+          select('all', true);
+          if (input) input.focus();
+        });
+      });
+
+      /* "/" focuses the search box, the way a search-first interface should. */
+      if (input) {
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+          var el = document.activeElement;
+          var tag = el ? el.tagName : '';
+          if (tag === 'INPUT' || tag === 'TEXTAREA' || (el && el.isContentEditable)) return;
+          e.preventDefault();
+          input.focus();
+          input.select();
+        });
       }
-      apply();
+
+      var params = new URL(window.location.href).searchParams;
+      if (input && params.get('q')) input.value = params.get('q');
+      var preset = params.get('filter');
+      var presetBtn = preset
+        ? group.querySelector('.filter[data-filter="' + preset.replace(/["\\]/g, '') + '"]')
+        : null;
+      select(presetBtn ? preset : 'all', false);
     });
   }
 
@@ -217,11 +263,76 @@
     update();
   }
 
-  /* ---------- Print ---------- */
+  /* ---------- Deep links: /projects.html#clarifin opens that card ---------- */
 
-  function initPrint() {
+  function initDeepLink() {
+    function openTarget() {
+      var id = window.location.hash.slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      var details = el.querySelector('details');
+      if (details) details.open = true;
+      el.hidden = false;
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', openTarget);
+    if (window.location.hash) window.setTimeout(openTarget, 60);
+  }
+
+  /* ---------- Prefetch a page on hover so navigation feels instant ---------- */
+
+  function initPrefetch() {
+    if (navigator.connection && (navigator.connection.saveData ||
+        /2g/.test(navigator.connection.effectiveType || ''))) return;
+
+    var done = {};
+    function prefetch(href) {
+      if (!href || done[href]) return;
+      done[href] = true;
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      document.head.appendChild(link);
+    }
+
+    function candidate(e) {
+      var a = e.target.closest ? e.target.closest('a[href$=".html"]') : null;
+      if (!a || a.origin !== window.location.origin) return;
+      prefetch(a.href);
+    }
+
+    document.addEventListener('pointerenter', candidate, true);
+    document.addEventListener('touchstart', candidate, { capture: true, passive: true });
+    document.addEventListener('focusin', candidate);
+  }
+
+  /* ---------- Printing: expand every collapsed panel, then restore ---------- */
+
+  function initPrintExpand() {
+    var reopened = [];
+    function expand() {
+      reopened = [];
+      document.querySelectorAll('details:not([open])').forEach(function (d) {
+        d.open = true;
+        reopened.push(d);
+      });
+    }
+    function restore() {
+      reopened.forEach(function (d) { d.open = false; });
+      reopened = [];
+    }
+    window.addEventListener('beforeprint', expand);
+    window.addEventListener('afterprint', restore);
+    if (window.matchMedia) {
+      var mq = window.matchMedia('print');
+      var onChange = function (e) { if (e.matches) expand(); else restore(); };
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+    }
     document.querySelectorAll('[data-print-page]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.print(); });
+      btn.addEventListener('click', function () { expand(); window.print(); });
     });
   }
 
@@ -238,6 +349,8 @@
     initTimeline();
     initCopy();
     initToTop();
-    initPrint();
+    initDeepLink();
+    initPrefetch();
+    initPrintExpand();
   });
 })();

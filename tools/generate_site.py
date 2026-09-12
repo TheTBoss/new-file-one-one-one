@@ -34,12 +34,15 @@ CSS = r"""
   --bg-3:#EAE5D9;
   --ink:#2B2B2B;
   --ink-2:#57534B;
-  --ink-3:#857F74;
-  --rule:#E2DCD0;
-  --rule-strong:#CFC7B7;
-  --gold:#C9A227;
-  --gold-ink:#8A6E12;
+  --ink-3:#716B62;          /* 4.56:1 on the card background */
+  --rule:#E2DCD0;           /* decorative hairlines */
+  --rule-strong:#CFC7B7;    /* decorative emphasis */
+  --ui-border:#8F8880;      /* interactive controls: 3.02:1, meets WCAG 1.4.11 */
+  --gold:#C9A227;           /* decorative accent */
+  --gold-line:#A58520;      /* accent used to carry state: 3.04:1 */
+  --gold-ink:#836911;       /* accent text: 4.54:1 */
   --gold-wash:rgba(201,162,39,.10);
+  --focus:#2B2B2B;
   --shadow:0 1px 2px rgba(43,43,43,.04),0 8px 24px -12px rgba(43,43,43,.18);
 
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
@@ -64,12 +67,15 @@ CSS = r"""
     --bg-3:#2A2A27;
     --ink:#E9E6DF;
     --ink-2:#B5B0A5;
-    --ink-3:#8C877E;
+    --ink-3:#8D887F;
     --rule:#34332E;
     --rule-strong:#45443D;
+    --ui-border:#726F66;
     --gold:#D8B646;
+    --gold-line:#D8B646;
     --gold-ink:#E3C468;
     --gold-wash:rgba(216,182,70,.12);
+    --focus:#E9E6DF;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
   }
 }
@@ -81,12 +87,15 @@ CSS = r"""
   --bg-3:#2A2A27;
   --ink:#E9E6DF;
   --ink-2:#B5B0A5;
-  --ink-3:#8C877E;
+  --ink-3:#8D887F;
   --rule:#34332E;
   --rule-strong:#45443D;
+  --ui-border:#726F66;
   --gold:#D8B646;
+  --gold-line:#D8B646;
   --gold-ink:#E3C468;
   --gold-wash:rgba(216,182,70,.12);
+  --focus:#E9E6DF;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
 }
 
@@ -111,7 +120,18 @@ img{max-width:100%;height:auto}
 
 a{color:inherit;text-decoration:none}
 
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+:focus-visible{
+  outline:2px solid var(--focus);
+  outline-offset:3px;
+  border-radius:2px;
+}
+.card:focus-within{border-color:var(--ui-border)}
+
+::selection{background:var(--gold-wash);color:var(--ink)}
+:root{scrollbar-color:var(--ui-border) transparent}
+
+/* Anchors must clear the sticky header */
+[id]{scroll-margin-top:5.5rem}
 
 .skip{
   position:absolute;left:.5rem;top:-4rem;z-index:200;
@@ -155,7 +175,7 @@ a{color:inherit;text-decoration:none}
   font-family:var(--sans);font-size:.6875rem;font-weight:700;
   letter-spacing:.08em;
   color:var(--gold-ink);
-  border:1px solid var(--gold);
+  border:1px solid var(--gold-line);
   padding:.15rem .3rem;border-radius:2px;
 }
 
@@ -183,7 +203,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-2);cursor:pointer;
   transition:color .15s ease,border-color .15s ease,background-color .15s ease;
 }
-.icon-btn:hover{color:var(--ink);border-color:var(--rule);background:var(--bg-2)}
+.icon-btn:hover{color:var(--ink);border-color:var(--ui-border);background:var(--bg-2)}
 .icon-btn svg{width:1.0625rem;height:1.0625rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 .theme-toggle .icon-moon{display:none}
@@ -258,7 +278,7 @@ p:last-child{margin-bottom:0}
 .tiny{font-size:.8125rem;color:var(--ink-3)}
 
 .link{
-  border-bottom:1px solid var(--gold);padding-bottom:1px;
+  border-bottom:1px solid var(--gold-line);padding-bottom:1px;
   transition:color .15s ease,border-color .15s ease;
 }
 .link:hover{color:var(--gold-ink);border-bottom-color:var(--gold-ink)}
@@ -268,24 +288,33 @@ a:hover .arrow::after,a.arrow:hover::after{transform:translateX(3px)}
 
 .btn{
   display:inline-flex;align-items:center;gap:.5rem;
-  padding:.6rem 1.1rem;
-  border:1px solid var(--rule-strong);border-radius:var(--radius);
+  padding:.6rem 1.1rem;min-height:2.75rem;
+  border:1px solid var(--ui-border);border-radius:var(--radius);
   background:var(--bg);color:var(--ink);
   font-family:var(--sans);font-size:.9rem;font-weight:500;
   cursor:pointer;
   transition:border-color .15s ease,background-color .15s ease,color .15s ease;
 }
-.btn:hover{border-color:var(--gold);background:var(--gold-wash)}
+.btn:hover{border-color:var(--gold-line);background:var(--gold-wash)}
 .btn-primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .btn-primary:hover{background:var(--gold-ink);border-color:var(--gold-ink);color:#fff}
 .btn svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 /* ---------- Hero (home) ---------- */
 
-.hero{padding-block:clamp(3rem,9vw,6rem) var(--gap)}
+.hero{padding-block:clamp(3rem,9vw,6rem) calc(var(--gap) * .35)}
 .hero h1{margin-bottom:1.25rem}
-.hero .lede{max-width:34em;margin-bottom:1.75rem}
+.hero .lede{max-width:32em;margin-bottom:1.75rem}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-bottom:2.5rem}
+
+@media (min-width:62em){
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:4rem;align-items:end}
+  .hero-grid .facts{
+    border-top:0;padding-top:0;margin-bottom:.35rem;
+    grid-template-columns:1fr;gap:1.1rem;
+    border-left:1px solid var(--rule);padding-left:2rem;
+  }
+}
 
 .facts{
   list-style:none;margin:0;padding:1.5rem 0 0;
@@ -316,7 +345,7 @@ a:hover .arrow::after,a.arrow:hover::after{transform:translateX(3px)}
   transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease;
 }
 .card:hover{border-color:var(--rule-strong)}
-a.card:hover,.card-link:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:var(--shadow)}
+a.card:hover,.card-link:hover{border-color:var(--gold-line);transform:translateY(-2px);box-shadow:var(--shadow)}
 .card h3{margin-bottom:.4rem}
 .card p{font-size:.95rem;color:var(--ink-2)}
 .card .foot{margin-top:auto;padding-top:1rem;font-size:.8125rem;color:var(--gold-ink)}
@@ -328,7 +357,7 @@ a.card:hover,.card-link:hover{border-color:var(--gold);transform:translateY(-2px
   border:1px solid var(--rule-strong);border-radius:2px;
   padding:.15rem .4rem;
 }
-.tag-accent{color:var(--gold-ink);border-color:var(--gold)}
+.tag-accent{color:var(--gold-ink);border-color:var(--gold-line)}
 .card>.tag{align-self:flex-start}
 
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:0;padding:0}
@@ -366,9 +395,19 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
   width:100%;
   font:inherit;font-size:.9rem;
   color:var(--ink);background:var(--bg);
-  border:1px solid var(--rule-strong);border-radius:var(--radius);
-  padding:.5rem .75rem .5rem 2rem;
+  caret-color:var(--gold-ink);
+  border:1px solid var(--ui-border);border-radius:var(--radius);
+  padding:.65rem .75rem .65rem 2rem;
+  min-height:2.75rem;
 }
+.search input:hover{border-color:var(--ink-3)}
+.search kbd{
+  position:absolute;right:.55rem;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:.7rem;color:var(--ink-3);
+  border:1px solid var(--rule-strong);border-radius:3px;
+  padding:.05rem .3rem;pointer-events:none;
+}
+.search input:focus~kbd,.search input:not(:placeholder-shown)~kbd{opacity:0}
 .search input::placeholder{color:var(--ink-3)}
 .search svg{
   position:absolute;left:.6rem;top:50%;transform:translateY(-50%);
@@ -377,15 +416,18 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
 .filters{display:flex;flex-wrap:wrap;gap:.35rem}
 .filter{
   font:inherit;font-size:.82rem;
-  padding:.4rem .75rem;
+  padding:.45rem .85rem;min-height:2.25rem;
   background:none;color:var(--ink-2);
-  border:1px solid var(--rule-strong);border-radius:99px;
+  border:1px solid var(--ui-border);border-radius:99px;
   cursor:pointer;
   transition:color .15s ease,border-color .15s ease,background-color .15s ease;
 }
 .filter:hover{color:var(--ink);border-color:var(--ink-3)}
+/* Pressed state is carried by weight and an inset rule as well as by colour. */
 .filter[aria-pressed="true"]{
-  color:var(--gold-ink);border-color:var(--gold);background:var(--gold-wash);font-weight:500;
+  color:var(--gold-ink);border-color:var(--gold-line);
+  background:var(--gold-wash);font-weight:600;
+  box-shadow:inset 0 -2px 0 var(--gold-line);
 }
 .result-count{font-size:.8125rem;color:var(--ink-3);margin-left:auto;font-variant-numeric:tabular-nums}
 .empty-state{padding:3rem 0;text-align:center;color:var(--ink-3)}
@@ -422,10 +464,10 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
 .tl-dot{
   position:absolute;left:0;top:.55rem;
   width:.6875rem;height:.6875rem;border-radius:50%;
-  background:var(--bg);border:1.5px solid var(--rule-strong);
+  background:var(--bg);border:1.5px solid var(--ui-border);
   transition:background-color .2s ease,border-color .2s ease;
 }
-.timeline li[data-current="true"] .tl-dot{background:var(--gold);border-color:var(--gold)}
+.timeline li[data-current="true"] .tl-dot{background:var(--gold);border-color:var(--gold-line)}
 .tl-btn{
   display:block;width:100%;text-align:left;
   background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;
@@ -450,7 +492,7 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
 
 /* ---------- Placeholder marker ---------- */
 
-.placeholder{border-style:dashed;border-color:var(--rule-strong);background:transparent}
+.placeholder{border-style:dashed;border-color:var(--ui-border);background:transparent}
 .placeholder-badge{
   display:inline-flex;align-items:center;gap:.35rem;
   font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
@@ -487,25 +529,28 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
 
 .to-top{
   position:fixed;right:1rem;bottom:1rem;z-index:90;
-  width:2.5rem;height:2.5rem;
-  background:var(--bg-2);border:1px solid var(--rule-strong);border-radius:50%;
+  width:2.75rem;height:2.75rem;
+  background:var(--bg-2);border:1px solid var(--ui-border);border-radius:50%;
   color:var(--ink-2);cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   opacity:0;visibility:hidden;transform:translateY(6px);
   transition:opacity .2s ease,transform .2s ease,visibility .2s;
 }
 .to-top[data-show="true"]{opacity:1;visibility:visible;transform:none}
-.to-top:hover{border-color:var(--gold);color:var(--gold-ink)}
+.to-top:hover{border-color:var(--gold-line);color:var(--gold-ink)}
 .to-top svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* ---------- Motion ---------- */
 
-.reveal{opacity:0;transform:translateY(14px)}
-.reveal.is-visible{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
+:root.js .reveal{opacity:0;transform:translateY(14px)}
+:root.js .reveal.is-visible{
+  opacity:1;transform:none;
+  transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.3,1);
+}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
-  .reveal{opacity:1;transform:none}
+  :root.js .reveal{opacity:1;transform:none}
 }
 
 @view-transition{navigation:auto}
@@ -514,6 +559,86 @@ ul.plain li::before{content:"";position:absolute;left:0;top:.72em;width:.35rem;h
 # --------------------------------------------------------------------------
 # CV page styles + print stylesheet (cv.html must print as one clean A4 page)
 # --------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------
+# Refinements: typography, high-contrast mode, touch targets, motion
+# --------------------------------------------------------------------------
+
+CSS += r"""
+/* ---------- Typographic detail ---------- */
+
+h1,h2,h3,h4{text-wrap:balance}
+p,li,.lede{text-wrap:pretty}
+
+h1{font-variant-numeric:oldstyle-nums}
+.when,.tl-year,.result-count,.facts dd{font-variant-numeric:tabular-nums}
+
+/* Hanging quotes and tighter serif rendering where it shows */
+.lede{font-feature-settings:"kern" 1,"liga" 1}
+
+/* ---------- Touch targets ---------- */
+
+@media (pointer:coarse){
+  .icon-btn{width:2.75rem;height:2.75rem}
+  .nav a{padding-block:.85rem}
+  .expando summary{padding-block:.35rem}
+  .tl-btn{padding-block:.25rem}
+}
+
+/* ---------- Collapsed content must leave the accessibility tree ---------- */
+
+.tl-body{visibility:hidden}
+.timeline li[data-open="true"] .tl-body{visibility:visible}
+
+/* ---------- Forced colours and high contrast ---------- */
+
+@media (prefers-contrast:more){
+  :root{
+    --ink-2:var(--ink);
+    --ink-3:var(--ink-2);
+    --rule:var(--ui-border);
+    --rule-strong:var(--ui-border);
+  }
+  .card,.btn,.filter,.search input{border-width:2px}
+  .link{border-bottom-width:2px}
+}
+
+@media (forced-colors:active){
+  .card,.btn,.filter,.search input,.tag{border:1px solid CanvasText}
+  .filter[aria-pressed="true"]{box-shadow:none;outline:2px solid Highlight}
+  .tl-dot{background:CanvasText}
+  .eyebrow::after{background:CanvasText}
+}
+
+/* ---------- View transitions ---------- */
+
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){animation:vt-out .16s ease both}
+  ::view-transition-new(root){animation:vt-in .22s ease both}
+  @keyframes vt-out{to{opacity:0}}
+  @keyframes vt-in{from{opacity:0}}
+}
+
+/* ---------- Empty state ---------- */
+
+.empty-state{padding:3.5rem 0;text-align:center}
+.empty-state p{color:var(--ink-2);margin-bottom:1rem}
+
+/* ---------- Print: every page, not just the CV ---------- */
+
+@media print{
+  .controls,.filters,.search,.result-count,.hero-actions,.contact-row,
+  .placeholder,.expando summary{display:none!important}
+  .expando{border-top:0;padding-top:0}
+  .expando .detail-body{padding-top:0}
+  .card{break-inside:avoid;page-break-inside:avoid;border:0;border-left:1pt solid #8A6E12;padding:0 0 0 6pt;background:#fff}
+  .grid{display:block}
+  .grid>*+*{margin-top:8pt}
+  .timeline li{break-inside:avoid}
+  .tl-body{visibility:visible;max-height:none;overflow:visible}
+  main a[href^="http"]:not([data-print])::after{content:" (" attr(href) ")";font-size:7pt;color:#555;word-break:break-all}
+}
+"""
 
 CSS += r"""
 /* ---------- CV document ---------- */
@@ -550,7 +675,8 @@ CSS += r"""
   :root{
     --bg:#fff;--bg-2:#fff;--bg-3:#fff;
     --ink:#000;--ink-2:#222;--ink-3:#444;
-    --rule:#bbb;--rule-strong:#bbb;--gold:#8A6E12;--gold-ink:#000;--gold-wash:transparent;
+    --rule:#bbb;--rule-strong:#bbb;--ui-border:#888;
+    --gold:#8A6E12;--gold-line:#8A6E12;--gold-ink:#000;--gold-wash:transparent;
   }
 
   body{background:#fff;color:#000;font-size:8.6pt;line-height:1.34}
@@ -562,6 +688,7 @@ CSS += r"""
   a,.link{color:#000;border-bottom:0;text-decoration:none}
 
   .cv-doc{max-width:none}
+  .cv-doc a::after{content:none!important}
   .cv-doc h1{font-size:19pt;margin-bottom:2pt}
   .cv-doc .lede{font-size:9.4pt;line-height:1.3;margin-bottom:2pt;max-width:none;color:#000}
   .cv-doc .cv-status{font-size:7.2pt;letter-spacing:.04em;margin-bottom:4pt}
@@ -591,7 +718,7 @@ CSS += r"""
   .cv-skills li::after{content:" \00b7";color:#888}
   .cv-skills li:last-child::after{content:""}
 
-  .reveal{opacity:1!important;transform:none!important}
+  :root.js .reveal{opacity:1!important;transform:none!important}
 }
 """
 
@@ -683,66 +810,112 @@ JS = r"""/* Thomas Willmott — site behaviour. No dependencies. */
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- Filterable, searchable collections ---------- */
+  /* ---------- Filterable, searchable collections ----------
+     Items carry data-tags. An optional wrapper marked data-filter-section
+     hides itself when every item inside it is filtered out. Works for a flat
+     grid of project cards and for skills grouped inside category cards. */
 
   function initFilters() {
-    var groups = document.querySelectorAll('[data-filter-group]');
-    groups.forEach(function (group) {
-      var items = group.querySelectorAll('[data-tags]');
-      var buttons = group.querySelectorAll('.filter');
+    document.querySelectorAll('[data-filter-group]').forEach(function (group) {
+      var items = Array.prototype.slice.call(group.querySelectorAll('[data-tags]'));
+      var sections = Array.prototype.slice.call(group.querySelectorAll('[data-filter-section]'));
+      var buttons = Array.prototype.slice.call(group.querySelectorAll('.filter'));
       var input = group.querySelector('.search input');
       var count = group.querySelector('.result-count');
       var empty = group.querySelector('.empty-state');
+      var clears = Array.prototype.slice.call(group.querySelectorAll('[data-clear]'));
+      var clearChip = group.querySelector('.filter[data-clear]');
+      var noun = group.getAttribute('data-noun') || 'item';
       var active = 'all';
 
-      function apply() {
+      function apply(pushState) {
         var q = input ? input.value.trim().toLowerCase() : '';
         var shown = 0;
 
         items.forEach(function (item) {
           var tags = (item.getAttribute('data-tags') || '').toLowerCase();
           var text = (item.textContent || '').toLowerCase();
-          var matchTag = active === 'all' || tags.indexOf(active) !== -1;
-          var matchText = !q || text.indexOf(q) !== -1;
-          var show = matchTag && matchText;
+          var show = (active === 'all' || tags.split(/\s+/).indexOf(active) !== -1) &&
+                     (!q || text.indexOf(q) !== -1);
           item.hidden = !show;
           if (show) shown++;
         });
 
-        if (count) {
-          var noun = group.getAttribute('data-noun') || 'item';
-          count.textContent = shown + ' ' + noun + (shown === 1 ? '' : 's');
-        }
+        sections.forEach(function (section) {
+          var any = section.querySelectorAll('[data-tags]:not([hidden])').length;
+          section.hidden = any === 0;
+        });
+
+        if (count) count.textContent = shown + ' ' + noun + (shown === 1 ? '' : 's');
         if (empty) empty.hidden = shown !== 0;
+        if (clearChip) clearChip.hidden = active === 'all' && !q;
+
+        if (pushState) {
+          var url = new URL(window.location.href);
+          if (active === 'all') url.searchParams.delete('filter');
+          else url.searchParams.set('filter', active);
+          if (q) url.searchParams.set('q', q);
+          else url.searchParams.delete('q');
+          history.replaceState(null, '', url);
+        }
+      }
+
+      function select(name, pushState) {
+        active = name || 'all';
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed',
+            b.getAttribute('data-filter') === active ? 'true' : 'false');
+        });
+        apply(pushState);
       }
 
       buttons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          active = btn.getAttribute('data-filter') || 'all';
-          buttons.forEach(function (b) {
-            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-          });
-          apply();
-          var url = new URL(window.location.href);
-          if (active === 'all') url.searchParams.delete('filter');
-          else url.searchParams.set('filter', active);
-          history.replaceState(null, '', url);
+          select(btn.getAttribute('data-filter'), true);
         });
       });
 
       if (input) {
-        input.addEventListener('input', apply);
+        var timer = null;
+        input.addEventListener('input', function () {
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function () { apply(true); }, 80);
+        });
         input.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') { input.value = ''; apply(); }
+          if (e.key !== 'Escape') return;
+          input.value = '';
+          apply(true);
         });
       }
 
-      var preset = new URL(window.location.href).searchParams.get('filter');
-      if (preset) {
-        var match = group.querySelector('.filter[data-filter="' + preset.replace(/"/g, '') + '"]');
-        if (match) match.click();
+      clears.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (input) input.value = '';
+          select('all', true);
+          if (input) input.focus();
+        });
+      });
+
+      /* "/" focuses the search box, the way a search-first interface should. */
+      if (input) {
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+          var el = document.activeElement;
+          var tag = el ? el.tagName : '';
+          if (tag === 'INPUT' || tag === 'TEXTAREA' || (el && el.isContentEditable)) return;
+          e.preventDefault();
+          input.focus();
+          input.select();
+        });
       }
-      apply();
+
+      var params = new URL(window.location.href).searchParams;
+      if (input && params.get('q')) input.value = params.get('q');
+      var preset = params.get('filter');
+      var presetBtn = preset
+        ? group.querySelector('.filter[data-filter="' + preset.replace(/["\\]/g, '') + '"]')
+        : null;
+      select(presetBtn ? preset : 'all', false);
     });
   }
 
@@ -819,11 +992,76 @@ JS = r"""/* Thomas Willmott — site behaviour. No dependencies. */
     update();
   }
 
-  /* ---------- Print ---------- */
+  /* ---------- Deep links: /projects.html#clarifin opens that card ---------- */
 
-  function initPrint() {
+  function initDeepLink() {
+    function openTarget() {
+      var id = window.location.hash.slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      var details = el.querySelector('details');
+      if (details) details.open = true;
+      el.hidden = false;
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', openTarget);
+    if (window.location.hash) window.setTimeout(openTarget, 60);
+  }
+
+  /* ---------- Prefetch a page on hover so navigation feels instant ---------- */
+
+  function initPrefetch() {
+    if (navigator.connection && (navigator.connection.saveData ||
+        /2g/.test(navigator.connection.effectiveType || ''))) return;
+
+    var done = {};
+    function prefetch(href) {
+      if (!href || done[href]) return;
+      done[href] = true;
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      document.head.appendChild(link);
+    }
+
+    function candidate(e) {
+      var a = e.target.closest ? e.target.closest('a[href$=".html"]') : null;
+      if (!a || a.origin !== window.location.origin) return;
+      prefetch(a.href);
+    }
+
+    document.addEventListener('pointerenter', candidate, true);
+    document.addEventListener('touchstart', candidate, { capture: true, passive: true });
+    document.addEventListener('focusin', candidate);
+  }
+
+  /* ---------- Printing: expand every collapsed panel, then restore ---------- */
+
+  function initPrintExpand() {
+    var reopened = [];
+    function expand() {
+      reopened = [];
+      document.querySelectorAll('details:not([open])').forEach(function (d) {
+        d.open = true;
+        reopened.push(d);
+      });
+    }
+    function restore() {
+      reopened.forEach(function (d) { d.open = false; });
+      reopened = [];
+    }
+    window.addEventListener('beforeprint', expand);
+    window.addEventListener('afterprint', restore);
+    if (window.matchMedia) {
+      var mq = window.matchMedia('print');
+      var onChange = function (e) { if (e.matches) expand(); else restore(); };
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+    }
     document.querySelectorAll('[data-print-page]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.print(); });
+      btn.addEventListener('click', function () { expand(); window.print(); });
     });
   }
 
@@ -840,7 +1078,9 @@ JS = r"""/* Thomas Willmott — site behaviour. No dependencies. */
     initTimeline();
     initCopy();
     initToTop();
-    initPrint();
+    initDeepLink();
+    initPrefetch();
+    initPrintExpand();
   });
 })();
 """
@@ -945,10 +1185,42 @@ FOOTER = """  <footer class="site-footer">
 """.format(email=EMAIL, linkedin=LINKEDIN, github=GITHUB, clarifin=CLARIFIN, up=ICONS["up"])
 
 
+PERSON_JSONLD = """{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Thomas Willmott",
+    "givenName": "Thomas",
+    "familyName": "Willmott",
+    "email": "mailto:%(email)s",
+    "url": "%(site)s/",
+    "jobTitle": "Finance and Mathematics undergraduate",
+    "description": "Final-year BSc Finance and Mathematics student at Royal Holloway, University of London. FMVA-certified financial modeller and founder of Clarifin.",
+    "nationality": "GB",
+    "knowsAbout": ["Financial modelling", "Discounted cash flow valuation", "Leveraged buyouts", "Financial econometrics", "Excel", "Python"],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Royal Holloway, University of London",
+      "url": "https://www.royalholloway.ac.uk/"
+    },
+    "hasCredential": [
+      {"@type": "EducationalOccupationalCredential", "name": "Financial Modeling & Valuation Analyst (FMVA)", "credentialCategory": "certificate", "recognizedBy": {"@type": "Organization", "name": "Corporate Finance Institute"}},
+      {"@type": "EducationalOccupationalCredential", "name": "Investment Banking & Private Equity Modeling Specialization", "credentialCategory": "certificate", "recognizedBy": {"@type": "Organization", "name": "Corporate Finance Institute"}}
+    ],
+    "worksFor": {"@type": "Organization", "name": "Clarifin", "url": "%(clarifin)s"},
+    "sameAs": ["%(linkedin)s", "%(github)s", "%(clarifin)s"]
+  }
+}""" % {"email": EMAIL, "site": SITE_URL, "clarifin": CLARIFIN,
+        "linkedin": LINKEDIN, "github": GITHUB}
+
+
 def page(slug, title, description, body, active=None):
     """Assembles one complete HTML document."""
     active = active or slug
     canonical = SITE_URL + ("/" if slug == "index.html" else "/" + slug)
+    jsonld = ("\n<script type=\"application/ld+json\">%s</script>" % PERSON_JSONLD
+              if slug == "index.html" else "")
     return """<!doctype html>
 <html lang="en-GB">
 <head>
@@ -965,15 +1237,24 @@ def page(slug, title, description, body, active=None):
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:locale" content="en_GB">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{description}">
 <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
 
-<link rel="icon" href="{favicon}">
+<meta property="og:image" content="{site}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Thomas Willmott — BSc Finance and Mathematics, Royal Holloway.">
+<meta name="twitter:image" content="{site}/og.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="assets/site.css">
-<script>{theme_init}</script>
+<script>{theme_init}</script>{jsonld}
 </head>
 
 <body>
@@ -991,7 +1272,8 @@ def page(slug, title, description, body, active=None):
         description=description,
         canonical=canonical,
         og_type="profile" if slug == "index.html" else "website",
-        favicon=FAVICON,
+        site=SITE_URL,
+        jsonld=jsonld,
         theme_init=THEME_INIT,
         header=header(active),
         body=body,
@@ -1016,6 +1298,8 @@ def expando(label, inner):
 # --------------------------------------------------------------------------
 
 HOME = """    <section class="hero wrap">
+      <div class="hero-grid">
+      <div>
       <h1>Thomas Willmott</h1>
       <p class="lede">
         Final-year Finance and Mathematics undergraduate at Royal Holloway.
@@ -1030,6 +1314,8 @@ HOME = """    <section class="hero wrap">
         <button class="btn copy-btn" type="button" data-copy="{email}">
           {copy}<span class="idle">Copy email</span><span class="copied">Copied</span>
         </button>
+      </div>
+
       </div>
 
       <dl class="facts">
@@ -1050,6 +1336,7 @@ HOME = """    <section class="hero wrap">
           <dd>Army Cadet Force<br><span class="tiny">11 years, now Company Commander</span></dd>
         </div>
       </dl>
+      </div>
     </section>
 
     <section class="section wrap reveal">
@@ -1455,12 +1742,17 @@ PROJECTS = [
 ]
 
 
+def slugify(text):
+    text = re.sub(r"&[a-z]+;", " ", text)
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
 def projects_html():
     cards = []
     for i, p in enumerate(PROJECTS):
         stack = "".join("<li>%s</li>" % s for s in p["stack"])
         href, label = p["link"]
-        cards.append("""        <article class="card" data-tags="{tags}">
+        cards.append("""        <article class="card" id="{slug}" data-tags="{tags}">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:1rem">
             <span class="tag tag-accent">{cat}</span>
             <span class="tiny">{when}</span>
@@ -1471,7 +1763,7 @@ def projects_html():
 {detail}
           <p class="foot"><a class="link arrow" href="{href}" rel="noopener">{label}</a></p>
         </article>""".format(
-            tags=p["tags"], cat=p["cat"], when=p["when"], title=p["title"],
+            slug=slugify(p["title"]), tags=p["tags"], cat=p["cat"], when=p["when"], title=p["title"],
             summary=p["summary"], stack=stack,
             detail=expando("Details", p["detail"]),
             href=href, label=label))
@@ -1491,6 +1783,7 @@ PROJECTS_PAGE = """    <section class="section wrap">
           <div class="search">
             {search_icon}
             <input id="project-search" type="search" placeholder="Search projects, tools, methods&hellip;" aria-label="Search projects" autocomplete="off">
+            <kbd aria-hidden="true">/</kbd>
           </div>
           <div class="filters" role="group" aria-label="Filter projects by type">
             <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
@@ -1499,6 +1792,7 @@ PROJECTS_PAGE = """    <section class="section wrap">
             <button class="filter" type="button" data-filter="finance" aria-pressed="false">Finance</button>
             <button class="filter" type="button" data-filter="software" aria-pressed="false">Software</button>
           </div>
+          <button class="filter" type="button" data-clear hidden>Clear</button>
           <p class="result-count" role="status" aria-live="polite"></p>
         </div>
 
@@ -1506,7 +1800,10 @@ PROJECTS_PAGE = """    <section class="section wrap">
         <div class="grid grid-2">
 {cards}
         </div>
-        <p class="empty-state" hidden>Nothing matches that. Try a different search or clear the filter.</p>
+        <div class="empty-state" hidden>
+          <p>Nothing matches that.</p>
+          <button class="btn" type="button" data-clear>Clear search and filters</button>
+        </div>
       </div>
     </section>
 """.format(eyebrow=eyebrow("01", "Work"), search_icon=ICONS["search"], cards=projects_html())
@@ -1553,16 +1850,16 @@ def skills_html():
     for name, tag, items in SKILL_GROUPS:
         rows = []
         for label, use in items:
-            rows.append("""            <li>
+            rows.append("""            <li data-tags="{tag}">
               <h4>{label}</h4>
               <p class="tiny" style="margin-top:.15rem">{use}</p>
-            </li>""".format(label=label, use=use))
-        blocks.append("""        <section class="card" data-tags="{tag}">
+            </li>""".format(tag=tag, label=label, use=use))
+        blocks.append("""        <section class="card" data-filter-section>
           <h3>{name}</h3>
           <ul class="plain" style="margin-top:.9rem;list-style:none">
 {rows}
           </ul>
-        </section>""".format(tag=tag, name=name, rows="\n".join(rows)))
+        </section>""".format(name=name, rows="\n".join(rows)))
     return "\n".join(blocks)
 
 
@@ -1574,11 +1871,12 @@ SKILLS_PAGE = """    <section class="section wrap">
         self-rated percentages &mdash; ask me to open a model instead.
       </p>
 
-      <div data-filter-group data-noun="area">
+      <div data-filter-group data-noun="skill">
         <div class="controls">
           <div class="search">
             {search_icon}
             <input id="skill-search" type="search" placeholder="Search skills&hellip;" aria-label="Search skills" autocomplete="off">
+            <kbd aria-hidden="true">/</kbd>
           </div>
           <div class="filters" role="group" aria-label="Filter skills by area">
             <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
@@ -1586,6 +1884,7 @@ SKILLS_PAGE = """    <section class="section wrap">
             <button class="filter" type="button" data-filter="technical" aria-pressed="false">Technical</button>
             <button class="filter" type="button" data-filter="leadership" aria-pressed="false">Leadership</button>
           </div>
+          <button class="filter" type="button" data-clear hidden>Clear</button>
           <p class="result-count" role="status" aria-live="polite"></p>
         </div>
 
@@ -1593,7 +1892,10 @@ SKILLS_PAGE = """    <section class="section wrap">
         <div class="grid grid-2 grid-start">
 {cards}
         </div>
-        <p class="empty-state" hidden>Nothing matches that. Try a different search or clear the filter.</p>
+        <div class="empty-state" hidden>
+          <p>Nothing matches that.</p>
+          <button class="btn" type="button" data-clear>Clear search and filters</button>
+        </div>
       </div>
     </section>
 
@@ -1931,6 +2233,49 @@ CV = """    <section class="section wrap">
 """.format(email=EMAIL, linkedin=LINKEDIN, github=GITHUB, clarifin=CLARIFIN,
            download=ICONS["download"], print_icon=ICONS["print"])
 
+NOT_FOUND = """    <section class="section wrap">
+      <div class="wrap-prose" style="padding:0">
+        <p class="eyebrow"><span class="num">404</span> Page not found</p>
+        <h1 style="font-size:clamp(1.9rem,1.4rem + 2.2vw,2.75rem)">That page isn&rsquo;t here</h1>
+        <p class="lede" style="margin:1.25rem 0">
+          The link is either out of date or slightly wrong. Everything on the
+          site is one hop away.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="index.html">Home</a>
+          <a class="btn" href="projects.html">Projects</a>
+          <a class="btn" href="cv.html">CV</a>
+        </div>
+      </div>
+    </section>
+"""
+
+
+FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TW">
+  <rect width="64" height="64" rx="6" fill="#2B2B2B"/>
+  <text x="32" y="43" font-family="Georgia, 'Times New Roman', serif" font-size="30"
+        font-weight="600" fill="#C9A227" text-anchor="middle">TW</text>
+</svg>
+"""
+
+
+MANIFEST = """{
+  "name": "Thomas Willmott",
+  "short_name": "T. Willmott",
+  "description": "Personal site of Thomas Willmott: finance, modelling and things built.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#FAF8F4",
+  "theme_color": "#FAF8F4",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
+"""
+
+
 # --------------------------------------------------------------------------
 # Write everything out
 # --------------------------------------------------------------------------
@@ -1948,8 +2293,8 @@ PAGES = [
      ABOUT),
     ("projects.html",
      "Projects — Thomas Willmott",
-     "Financial research, a live templates business and software projects: Clarifin, "
-     "a Hollywood Bowl LBO series, a Microsoft DCF, and two builds of a health tracking app.",
+     "Financial research, a live templates business and software builds: Clarifin, a "
+     "Hollywood Bowl LBO series, a Microsoft DCF and two health-tracking apps.",
      PROJECTS_PAGE),
     ("skills.html",
      "Skills — Thomas Willmott",
@@ -1982,29 +2327,55 @@ def main():
     import base64
 
     total = 0
+    emitted = []
     for slug, title, description, body in PAGES:
-        total += write(slug, page(slug, title, description, body))
+        html = page(slug, title, description, body)
+        emitted.append(html)
+        total += write(slug, html)
+
+    not_found = page("404.html", "Page not found — Thomas Willmott",
+                     "That page does not exist on Thomas Willmott's site. Links back to the "
+                     "home page, projects and CV.",
+                     NOT_FOUND, active="")
+    emitted.append(not_found)
+    total += write("404.html", not_found)
 
     total += write("assets/site.css", CSS.strip() + "\n")
     total += write("assets/site.js", JS)
+    write("favicon.svg", FAVICON_SVG)
+    write("site.webmanifest", MANIFEST)
 
-    digest = hashlib.sha256(THEME_INIT.encode("utf-8")).digest()
-    script_hash = "sha256-" + base64.b64encode(digest).decode("ascii")
+    # Hash every inline script the pages actually contain, so the CSP needs no
+    # 'unsafe-inline' for scripts.
+    inline = set()
+    for html in emitted:
+        for match in re.findall(r"<script[^>]*>(.+?)</script>", html, re.S):
+            inline.add(match)
+    hashes = " ".join(
+        "'sha256-" + base64.b64encode(hashlib.sha256(x.encode("utf-8")).digest()).decode("ascii") + "'"
+        for x in sorted(inline)
+    )
 
     write("_headers", """/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  Content-Security-Policy: default-src 'none'; script-src 'self' '{h}'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'self' {h}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 /assets/*
+  Cache-Control: public, max-age=86400
+
+/*.png
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
   Cache-Control: public, max-age=86400
 
 /thomas-willmott-cv.pdf
   Cache-Control: public, max-age=3600
   Content-Disposition: attachment; filename="Thomas-Willmott-CV.pdf"
-""".format(h=script_hash))
+""".format(h=hashes))
 
     write("robots.txt", "User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE_URL)
 
@@ -2019,7 +2390,7 @@ def main():
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "\n".join(urls) + "\n</urlset>\n")
 
-    print("wrote %d pages + assets (%.1f KB of HTML/CSS/JS)" % (len(PAGES), total / 1024))
+    print("wrote %d pages + 404 + assets (%.1f KB of HTML/CSS/JS)" % (len(PAGES), total / 1024))
 
 
 if __name__ == "__main__":

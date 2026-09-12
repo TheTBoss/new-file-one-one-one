@@ -1,0 +1,14 @@
+{
+  "name": "Thomas Willmott",
+  "short_name": "T. Willmott",
+  "description": "Personal site of Thomas Willmott: finance, modelling and things built.",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#FAF8F4",
+  "theme_color": "#FAF8F4",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

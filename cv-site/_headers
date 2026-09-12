@@ -3,9 +3,15 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-zNylxGcCR9NNB7RsKlg2D+/WWZIFSJh1MHZqOOELtpQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-zNylxGcCR9NNB7RsKlg2D+/WWZIFSJh1MHZqOOELtpQ=' 'sha256-25WX9o+eCGYu1yqz/XELUAOYAeT+mwDzCz8i4vFfFUU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 /assets/*
+  Cache-Control: public, max-age=86400
+
+/*.png
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
   Cache-Control: public, max-age=86400
 
 /thomas-willmott-cv.pdf
