@@ -1949,13 +1949,14 @@ INTERESTS = """    <section class="section wrap">
         </article>
         <article class="card">
           <span class="tag tag-accent">Ongoing</span>
-          <h3 style="margin-top:.7rem">Building things that work</h3>
+          <h3 style="margin-top:.7rem">Running something that is mine</h3>
           <p>
-            I learn a stack by shipping something in it. That is how Clarifin
-            ended up running on infrastructure I configured myself &mdash;
-            Workers, object storage, payments and automated delivery &mdash;
-            rather than on somebody else&rsquo;s storefront plugin, and how this
-            site came to be written by hand rather than assembled from a theme.
+            Clarifin is the part of the week nobody sets for me. I decide what
+            gets built, write the models, price them and answer the support
+            email, and I set up the infrastructure behind it rather than
+            renting a storefront platform. Doing every part of it is the
+            point &mdash; it is the fastest way I have found to learn how a
+            business actually holds together.
           </p>
         </article>
         <article class="card">
